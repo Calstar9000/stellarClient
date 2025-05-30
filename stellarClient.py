@@ -19,7 +19,7 @@ In Progress:
 import sys
 import pyautogui
 from keylogger import keyLog, keyLogPrint
-from macros import runMacroChoice
+from keyboardScreen import keyboardWidget
 from encoder import encode, decode
 from gameScreen import *
 from PyQt5.QtWidgets import QApplication, QPushButton, QLabel, QBoxLayout, QWidget
@@ -31,12 +31,13 @@ screenwidth, screenlength = pyautogui.size()
 class stellarClientWidget(QWidget):
     def __init__(self):
         super().__init__()
-        self.loadUi()
+        self.loadUI()
         self.settings()
         self.gamesWindow = None
+        self.keyboardWindow = None
         self.buttonEvents()
 
-    def loadUi(self):
+    def loadUI(self):
         self.title = QLabel('Stellar Client')
         self.subtitle = QLabel('Your app for everything')
         self.applicationsLabel = QLabel('Applications')
@@ -46,6 +47,7 @@ class stellarClientWidget(QWidget):
         self.subtitle.setFont(QFont('Castellar', 25))
         self.title.setAlignment(QtCore.Qt.AlignCenter)
         self.subtitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.applicationsLabel.setFont(QFont('Castellar', 20, 100))
         self.applicationsLabel.setAlignment(QtCore.Qt.AlignCenter)
 
         self.master = QBoxLayout(2)
@@ -80,7 +82,9 @@ class stellarClientWidget(QWidget):
         self.gamesWindow.show()
 
     def keyboardButton(self):
-        pass
+        if self.keyboardWindow == None:
+            self.keyboardWindow = keyboardWidget()
+        self.keyboardWindow.show()
 
 
 if __name__ in "__main__":
